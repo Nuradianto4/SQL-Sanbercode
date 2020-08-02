@@ -1,0 +1,52 @@
+SOAL 1
+//membuat database
+CREATE DATABASE myshop
+
+SOAL 2
+//membuat tabel users
+CREATE TABLE users(
+    id int NOT NULL AUTO_INCREMENT,
+    name varchar(255) not null,
+    email varchar(255) not null,
+    password varchar(255) not null,
+    PRIMARY KEY(id));
+//membuat tabel items
+CREATE TABLE items(
+    id int not null AUTO_INCREMENT,
+    name varchar(255) not null,
+    description varchar(255) not null,
+    price int not null,
+    stock int not null,
+    category_id int not null,
+    PRIMARY KEY(id));
+//membuat tabel categories
+CREATE TABLE categories(
+    id int not null AUTO_INCREMENT,
+    name varchar(255),
+    PRIMARY KEY(id));
+//membuat foreign key
+ALTER TABLE items ADD FOREIGN KEY (category_id) REFERENCES categories(id);
+
+SOAL 3
+//insert tabel users
+INSERT INTO `users`(`name`, `email`, `password`) VALUES ("John Doe","john@doe.com","john123"),("Jane Doe","jane@doe.com","jenitan123");
+//insert categories
+INSERT INTO `categories`(`name`) VALUES ("gadget"),("cloth"),("men"),("women"),("branded");
+//insert items
+INSERT INTO `items`(`name`, `description`, `price`, `stock`, `category_id`) VALUES ("Sumsang b50","hape keren dari merek sumsang",4000000,100,1),("Uniklooh","baju keren dari brand ternama",500000,50,2),("IMHO Watch","jam tangan anak yang jujur banget",2000000,10,1);
+
+SOAL 4
+SOAL A Mengambil data users
+SELECT `id`, `name`, `email` FROM `users`
+
+SOAL B Mengambil data items
+1.
+SELECT `id`, `name`, `description`, `price`, `stock`, `category_id` FROM `items` WHERE price>=1000000;
+2.
+SELECT * FROM `items` WHERE name LIKE "%sang%"
+
+SOAL C Menampilkan data items join dengan kategori
+SELECT items.id,items.name,items.description,items.price,items.stock,items.category_id, categories.name AS kategori FROM items INNER JOIN categories ON items.category_id=categories.id;
+
+SOAL 5
+UPDATE `items` SET `price`=2500000 WHERE name="sumsang b50"
